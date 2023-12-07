@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', function() {
     var canvas = document.getElementById('renderCanvas');
     var engine = new BABYLON.Engine(canvas, true);
-
+    var totalShelves = 1;
     
 
     var createScene = function() {
@@ -48,7 +48,7 @@ window.addEventListener('DOMContentLoaded', function() {
         var shelfWidth = 7;
         var shelfDepth = 2;
         var shelfSpacing = 3; // Space between shelves
-        var totalShelves = 5;
+        totalShelves = 5;
         var boxSize = 1.3; // Size of the boxes
         var boxWidth = 1.3;
         var boxHeight = 1.3;
@@ -91,7 +91,62 @@ window.addEventListener('DOMContentLoaded', function() {
         return scene;
     };
 
+    // Build the JSON for shelf data
+    function gatherShelfData() {
+        var shelfData = {
+            shelves: []
+        };
+    
+        for (let i = 0; i < totalShelves; i++) {
+            let shelf = {
+                shelfNumber: i + 1,
+                boxes: []
+            };
+    
+            for (let j = 0; j < 5; j++) {
+                var box = scene.getMeshByName("box" + i + "_" + j);
+                if (box) {
+                    shelf.boxes.push({
+                        boxID: "Box " + (j + 1),
+                        boxLabel: "Item " + String.fromCharCode(65 + i), // ASCII for 'A', 'B', 'C', etc.
+                        position: {
+                            x: box.position.x,
+                            y: box.position.y,
+                            z: box.position.z
+                        }
+                    });
+                }
+            }
+    
+            shelfData.shelves.push(shelf);
+        }
+        return shelfData;
+    }
+
+    // Function to send data to Spring Boot REST API
+    function sendDataToAPI(shelfData) {
+        fetch('http://your-spring-boot-api-endpoint/shelfData', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(shelfData),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            console.log(JSON.stringify(shelfData))
+        });
+    }
+
+
+
     var scene = createScene();
+    var shelfData = gatherShelfData();
+    sendDataToAPI(shelfData);
 
     // Run the render loop
     engine.runRenderLoop(function() {
