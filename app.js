@@ -166,10 +166,34 @@ window.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Function to create a legend
+    function createLegend() {
+        var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
+        // Define the starting point for the first legend item
+        var startingTopOffset = -20;
+
+        for (let i = 0; i < totalShelves; i++) {
+            var legendText = new BABYLON.GUI.TextBlock();
+            legendText.text = "shelf" + (i + 1) + ": Item " + String.fromCharCode(65 + i);
+            legendText.color = "white";
+            legendText.fontSize = "14px";
+            legendText.fontFamily = "Segoe UI";  // You can choose any font
+            legendText.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+            legendText.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+            legendText.top = "-" + (20 * (totalShelves - i)) + "px";
+            legendText.left = "-20px";
+            legendText.shadowColor = "black";
+            legendText.shadowBlur = 3;
+            advancedTexture.addControl(legendText);
+    
+        }
+    }
 
     var scene = createScene();
     var shelfData = gatherShelfData();
+    
+    createLegend();
     sendDataToAPI(shelfData);
 
     // Run the render loop
@@ -181,4 +205,19 @@ window.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', function() {
         engine.resize();
     });
+
+    // Function to export the shelf model in GLB format
+    function exportShelfModel() {
+        BABYLON.GLTF2Export.GLBAsync(scene, "shelfModel").then((gltf) => {
+            gltf.downloadFiles();
+        });
+    }
+    // Call the export function
+    //exportShelfModel();
+
+
 });
+
+ 
+
+
