@@ -2,6 +2,10 @@ window.addEventListener('DOMContentLoaded', function() {
     var canvas = document.getElementById('renderCanvas');
     var engine = new BABYLON.Engine(canvas, true);
     var totalShelves = 1;
+    var shelfHeight = 0.3;
+    var shelfWidth = 7;
+    var shelfDepth = 2;
+    var shelfSpacing = 3; 
     
 
     var createScene = function() {
@@ -44,10 +48,10 @@ window.addEventListener('DOMContentLoaded', function() {
         }
 
         // Variables for shelf dimensions
-        var shelfHeight = 0.3;
-        var shelfWidth = 7;
-        var shelfDepth = 2;
-        var shelfSpacing = 3; // Space between shelves
+        shelfHeight = 0.3;
+        shelfWidth = 7;
+        shelfDepth = 2;
+        shelfSpacing = 3; // Space between shelves
         totalShelves = 5;
         var boxSize = 1.3; // Size of the boxes
         var boxWidth = 1.3;
@@ -100,6 +104,15 @@ window.addEventListener('DOMContentLoaded', function() {
         for (let i = 0; i < totalShelves; i++) {
             let shelf = {
                 shelfNumber: i + 1,
+                shelfHeight: shelfHeight,
+                shelfWidth: shelfWidth,
+                shelfDepth: shelfDepth,
+                shelfSpacing: shelfSpacing,
+                shelfCoordinates: {
+                    x: -shelfWidth / 2, // Adjust as per shelf positioning logic
+                    y: i * shelfSpacing,
+                    z: 0
+                },
                 boxes: []
             };
     
@@ -108,7 +121,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 if (box) {
                     shelf.boxes.push({
                         boxID: "Box " + (j + 1),
-                        boxLabel: "Item " + String.fromCharCode(65 + i), // ASCII for 'A', 'B', 'C', etc.
+                        boxLabel: "Item " + String.fromCharCode(65 + i),
                         position: {
                             x: box.position.x,
                             y: box.position.y,
