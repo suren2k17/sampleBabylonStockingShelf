@@ -98,8 +98,18 @@ window.addEventListener('DOMContentLoaded', function() {
     // Build the JSON for shelf data
     function gatherShelfData() {
         var shelfData = {
+            stockingSection: "Cookie/Cracker LunchBox",
+            planogram: "12F Cookies/Crackers",
             shelves: []
         };
+    
+        var boxDetails = [
+            { itemUPC: "89012345678", itemDescription: "Oreo Snacks", CIC: "2050026" },
+            { itemUPC: "89012345671", itemDescription: "Chips Ahoy", CIC: "2050027" },
+            { itemUPC: "89012345672", itemDescription: "Cheez-IT", CIC: "2050025" },
+            { itemUPC: "89012345673", itemDescription: "Nila Wafers", CIC: "2050024" },
+            { itemUPC: "89012345674", itemDescription: "Ritz Snacks", CIC: "2050023" }
+        ];
     
         for (let i = 0; i < totalShelves; i++) {
             let shelf = {
@@ -109,7 +119,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 shelfDepth: shelfDepth,
                 shelfSpacing: shelfSpacing,
                 shelfCoordinates: {
-                    x: -shelfWidth / 2, // Adjust as per shelf positioning logic
+                    x: -shelfWidth / 2,
                     y: i * shelfSpacing,
                     z: 0
                 },
@@ -126,7 +136,8 @@ window.addEventListener('DOMContentLoaded', function() {
                             x: box.position.x,
                             y: box.position.y,
                             z: box.position.z
-                        }
+                        },
+                        ...boxDetails[j]
                     });
                 }
             }
