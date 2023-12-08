@@ -1,0 +1,50 @@
+{
+    "storeNumber": "2892",
+    "recommendations": [
+      {
+        "stockingSection": "Nuts and Bars",
+        "currentAisle": "A2",
+        "recommendedAisle": "A3"
+      },
+      {
+        "stockingSection": "Dairy Products",
+        "currentAisle": "A3",
+        "recommendedAisle": "A5"
+      },
+      {
+        "stockingSection": "Breads",
+        "currentAisle": "A5",
+        "recommendedAisle": "A9"
+      },
+      {
+        "stockingSection": "Water Bottles",
+        "currentAisle": "A9",
+        "recommendedAisle": "A15"
+      },
+      {
+        "stockingSection": "Soft Drinks",
+        "currentAisle": "A15",
+        "recommendedAisle": "A16"
+      },
+      {
+        "stockingSection": "Meat and Seafood",
+        "currentAisle": "A16",
+        "recommendedAisle": "A17"
+      },
+      {
+        "stockingSection": "Confectionery",
+        "currentAisle": "A17",
+        "recommendedAisle": "A19"
+      },
+      {
+        "stockingSection": "Pet Supplies",
+        "currentAisle": "A19",
+        "recommendedAisle": "A0"
+      },
+      {
+        "stockingSection": "Cookie/Cracker LunchBox",
+        "currentAisle": "A0",
+        "recommendedAisle": "A19"
+      }
+    ]
+  }
