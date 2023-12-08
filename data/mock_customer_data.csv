@@ -1,0 +1,32 @@
+AisleNumber,StockingSection,CustomerInteractions,CustomerDemographics,CustomerFeedback
+A1,Spices and Herbs,841,Young Adults,Positive
+A2,Nuts and Bars,2370,Families,Neutral
+A3,Dairy Products,3225,Families,Positive
+A4,Canned Foods,1126,Teens,Negative
+A5,Breads,1727,Elderly,Neutral
+A6,Spices and Herbs,963,Families,Neutral
+A7,Nuts and Bars,1472,Young Adults,Positive
+A8,Meat and Seafood,4319,Teens,Negative
+A9,Water Bottles,3020,Families,Negative
+A10,Breads,291,Teens,Negative
+A11,Beers,1356,Teens,Negative
+A12,Asian Foods,2410,Teens,Positive
+A13,Fresh Fruits,1910,Teens,Negative
+A14,Beers,406,Elderly,Neutral
+A15,Soft Drinks,716,Elderly,Positive
+A16,Meat and Seafood,3934,Teens,Neutral
+A17,Confectionery,4119,Teens,Positive
+A18,Water Bottles,2509,Families,Positive
+A19,Pet Supplies,3858,Young Adults,Positive
+A20,Canned Foods,376,Elderly,Neutral
+A21,Vegetables,354,Elderly,Neutral
+A22,Pasta and Rice,283,Families,Positive
+A23,Beers,3264,Families,Negative
+A24,Vegetables,4594,Elderly,Neutral
+A25,Breads,2999,Young Adults,Positive
+A26,Cleaning Supplies,3590,Young Adults,Neutral
+A27,Nuts and Bars,2603,Families,Neutral
+A28,Salty Snacks,4750,Teens,Positive
+A29,Nuts and Bars,3150,Young Adults,Negative
+A30,Beers,3896,Young Adults,Neutral
+A0,Cookie/Cracker LunchBox,711,Young Adults,Negative

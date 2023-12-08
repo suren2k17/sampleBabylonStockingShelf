@@ -1,0 +1,32 @@
+AisleNumber,StockingSection,LocalEvents,EconomicIndicators
+A1,Spices and Herbs,None,Positive
+A2,Nuts and Bars,Event2,Positive
+A3,Dairy Products,Event3,Positive
+A4,Canned Foods,Event1,Neutral
+A5,Breads,Event3,Neutral
+A6,Spices and Herbs,Event3,Negative
+A7,Nuts and Bars,Event2,Neutral
+A8,Meat and Seafood,Event2,Neutral
+A9,Water Bottles,Event2,Positive
+A10,Breads,Event3,Neutral
+A11,Beers,None,Neutral
+A12,Asian Foods,None,Neutral
+A13,Fresh Fruits,Event1,Negative
+A14,Beers,Event1,Neutral
+A15,Soft Drinks,None,Positive
+A16,Meat and Seafood,Event1,Negative
+A17,Confectionery,Event3,Positive
+A18,Water Bottles,Event2,Positive
+A19,Pet Supplies,None,Neutral
+A20,Canned Foods,None,Positive
+A21,Vegetables,Event2,Positive
+A22,Pasta and Rice,None,Positive
+A23,Beers,None,Positive
+A24,Vegetables,Event3,Positive
+A25,Breads,Event1,Neutral
+A26,Cleaning Supplies,Event3,Neutral
+A27,Nuts and Bars,None,Neutral
+A28,Salty Snacks,Event3,Positive
+A29,Nuts and Bars,Event1,Negative
+A30,Beers,Event2,Neutral
+A0,Cookie/Cracker LunchBox,Event1,Neutral

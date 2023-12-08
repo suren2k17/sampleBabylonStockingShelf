@@ -1,0 +1,32 @@
+AisleNumber,StockingSection,AisleTrafficFlow,ShelfSpaceUtilization,ProductPlacementEfficiency
+A1,Spices and Herbs,376,0.9,0.75
+A2,Nuts and Bars,170,0.94,0.84
+A3,Dairy Products,597,0.93,0.96
+A4,Canned Foods,240,0.61,0.78
+A5,Breads,591,0.67,0.67
+A6,Spices and Herbs,781,1.0,0.95
+A7,Nuts and Bars,231,0.69,0.96
+A8,Meat and Seafood,106,0.63,0.61
+A9,Water Bottles,466,0.73,0.84
+A10,Breads,418,0.54,0.92
+A11,Beers,757,0.82,0.62
+A12,Asian Foods,241,0.92,0.65
+A13,Fresh Fruits,752,0.72,0.52
+A14,Beers,441,0.6,0.84
+A15,Soft Drinks,870,0.58,0.69
+A16,Meat and Seafood,102,0.99,0.56
+A17,Confectionery,372,0.53,0.78
+A18,Water Bottles,197,0.62,0.86
+A19,Pet Supplies,836,0.5,0.81
+A20,Canned Foods,849,0.97,0.65
+A21,Vegetables,971,0.72,0.75
+A22,Pasta and Rice,487,0.87,0.68
+A23,Beers,288,0.87,0.75
+A24,Vegetables,250,0.98,0.63
+A25,Breads,344,0.86,0.73
+A26,Cleaning Supplies,281,0.78,0.72
+A27,Nuts and Bars,721,0.92,0.55
+A28,Salty Snacks,478,0.84,0.69
+A29,Nuts and Bars,376,0.66,0.99
+A30,Beers,576,0.95,0.67
+A0,Cookie/Cracker LunchBox,393,0.97,0.79

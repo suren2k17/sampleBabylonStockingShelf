@@ -1,0 +1,32 @@
+AisleNumber,StockingSection,SupplierPerformance,DeliveryTimes
+A1,Spices and Herbs,Average,2
+A2,Nuts and Bars,Good,4
+A3,Dairy Products,Poor,10
+A4,Canned Foods,Average,9
+A5,Breads,Poor,10
+A6,Spices and Herbs,Good,23
+A7,Nuts and Bars,Average,11
+A8,Meat and Seafood,Poor,13
+A9,Water Bottles,Poor,23
+A10,Breads,Good,8
+A11,Beers,Poor,3
+A12,Asian Foods,Average,19
+A13,Fresh Fruits,Poor,17
+A14,Beers,Poor,18
+A15,Soft Drinks,Good,3
+A16,Meat and Seafood,Poor,23
+A17,Confectionery,Good,24
+A18,Water Bottles,Poor,13
+A19,Pet Supplies,Average,7
+A20,Canned Foods,Average,15
+A21,Vegetables,Average,15
+A22,Pasta and Rice,Average,29
+A23,Beers,Good,3
+A24,Vegetables,Good,28
+A25,Breads,Good,15
+A26,Cleaning Supplies,Good,15
+A27,Nuts and Bars,Poor,19
+A28,Salty Snacks,Average,6
+A29,Nuts and Bars,Poor,13
+A30,Beers,Poor,22
+A0,Cookie/Cracker LunchBox,Poor,13
