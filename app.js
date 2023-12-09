@@ -10,6 +10,9 @@ window.addEventListener('DOMContentLoaded', function() {
 
     var createScene = function() {
         var scene = new BABYLON.Scene(engine);
+        // Inside your createScene function
+        var ground = BABYLON.MeshBuilder.CreateGround("ground", {width: 50, height: 50}, scene);
+        ground.isVisible = false; // Set to true if you want it to be visible
 
         // Parameters: name, alpha, beta, radius, target, scene
         var camera = new BABYLON.ArcRotateCamera("camera1", Math.PI / 4, Math.PI / 3, 30, new BABYLON.Vector3(0, 5, 0), scene);
@@ -91,6 +94,164 @@ window.addEventListener('DOMContentLoaded', function() {
         var rightBeam = BABYLON.MeshBuilder.CreateBox("rightBeam", {height: beamHeight, width: 0.3, depth: shelfDepth}, scene);
         rightBeam.position.x = shelfWidth / 2 + 0.15;
         rightBeam.position.y = beamHeight / 2 - shelfHeight / 2;
+
+        // Variable to store the currently selected box
+        var currentlyPickedMesh = null;
+        var startingPoint = null;
+
+        // Function to get the ground position from the screen position
+        function getGroundPosition(scene, camera) {
+            var pickinfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return mesh == ground; });
+            if (pickinfo.hit) {
+                return pickinfo.pickedPoint;
+            }
+            return null;
+        }
+
+        // Function to start dragging
+        function onPointerDown(evt) {
+            if (evt.button !== 0) {
+                return;
+            }
+        
+            // Pick with a ray from the camera to the pointer position
+            var pickResult = scene.pick(scene.pointerX, scene.pointerY);
+            
+            if (pickResult.hit) {
+                var mesh = pickResult.pickedMesh;
+        
+                // Check if the picked mesh is one of our boxes
+                if (mesh.name.startsWith("box") && mesh.isPickable) {
+                    currentlyPickedMesh = mesh;
+                    startingPoint = getGroundPosition();
+        
+                    if (startingPoint) {
+                        camera.detachControl(canvas);
+                    }
+                }
+            }
+        }
+
+        // Function to handle dragging
+        function onPointerMove(evt) {
+            if (!startingPoint || !currentlyPickedMesh) {
+                return;
+            }
+            var current = getGroundPosition(scene, camera);
+            if (current) {
+                var diff = current.subtract(startingPoint);
+                currentlyPickedMesh.position.addInPlace(diff);
+                startingPoint = current;
+            }
+        }
+
+        function isOverAnotherShelf(droppedPosition) {
+           
+            var tolerance = shelfHeight / 2;
+
+            // Iterate over each shelf to check if the dropped box's y-coordinate is within the shelf's bounds
+            for (let i = 0; i < totalShelves; i++) {
+                // Calculate the y-coordinate bounds of the shelf
+                var shelfLowerBound = i * shelfSpacing - tolerance;
+                var shelfUpperBound = i * shelfSpacing + shelfHeight + tolerance;
+
+                // Check if the dropped position's y-coordinate is within the bounds
+                if (droppedPosition.y >= shelfLowerBound && droppedPosition.y <= shelfUpperBound) {
+                    // If within bounds, return true indicating it is over a shelf
+                    return true;
+                }
+            }
+
+            // If the loop completes without returning true, the box was not dropped over a shelf
+            return false;
+        }
+
+        function getBoxToSwap(droppedPosition) {
+          
+            var closestShelfIndex = -1;
+            var minDistance = Number.MAX_VALUE;
+            for (let i = 0; i < totalShelves; i++) {
+                var shelfYPosition = i * shelfSpacing;
+                var distance = Math.abs(droppedPosition.y - shelfYPosition);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestShelfIndex = i;
+                }
+            }
+
+            // Assuming you have a predefined way to access the boxes on each shelf
+            // For simplicity, let's get the first box of the closest shelf that's not the shelf we dragged from
+            // Ensure you have logic to prevent selecting a box from the shelf we started from
+            if (closestShelfIndex !== -1 && closestShelfIndex !== startingShelfIndex) {
+                var boxName = "box" + closestShelfIndex + "_0"; // The name of the first box on the closest shelf
+                return scene.getMeshByName(boxName);
+            }
+
+            // If no suitable box is found, return null
+            return null;
+        }
+        
+
+        // Function to end dragging
+        function onPointerUp() {
+
+            if (currentlyPickedMesh) {
+                // Calculate the current ground position
+                var currentGroundPosition = getGroundPosition();
+        
+                if (isOverAnotherShelf(currentGroundPosition)) {
+                    var boxToSwapWith = getBoxToSwap(currentGroundPosition);
+                    if (boxToSwapWith) {
+                        // Swap the positions of the currentlyPickedMesh and the boxToSwapWith
+                        var tempPosition = currentlyPickedMesh.position.clone();
+                        currentlyPickedMesh.position = boxToSwapWith.position;
+                        boxToSwapWith.position = tempPosition;
+                    }
+                }
+        
+                // Reattach the camera controls to allow for camera movement again
+                camera.attachControl(canvas, true);
+                currentlyPickedMesh = null; // Clear the reference to the currently picked mesh
+            }
+        }
+        
+
+        canvas.addEventListener("pointerdown", onPointerDown, false);
+        canvas.addEventListener("pointerup", onPointerUp, false);
+        canvas.addEventListener("pointermove", onPointerMove, false);
+
+        // When the mesh is picked, store it in currentlyPickedMesh
+        scene.onPointerObservable.add((pointerInfo) => {
+            switch (pointerInfo.type) {
+                case BABYLON.PointerEventTypes.POINTERDOWN:
+                    if (pointerInfo.pickInfo.hit && pointerInfo.pickInfo.pickedMesh.isPickable) {
+                        currentlyPickedMesh = pointerInfo.pickInfo.pickedMesh;
+                        startingPoint = getGroundPosition(scene, camera);
+                        if (startingPoint) {
+                            camera.detachControl(canvas);
+                        }
+                    }
+                    break;
+                case BABYLON.PointerEventTypes.POINTERUP:
+                    if (currentlyPickedMesh) {
+                        camera.attachControl(canvas, true);
+                        currentlyPickedMesh = null;
+                    }
+                    break;
+                case BABYLON.PointerEventTypes.POINTERMOVE:
+                    if (!startingPoint || !currentlyPickedMesh) {
+                        return;
+                    }
+                    var current = getGroundPosition(scene, camera);
+                    if (!current) {
+                        return;
+                    }
+                    var diff = current.subtract(startingPoint);
+                    currentlyPickedMesh.position.addInPlace(diff);
+                    startingPoint = current;
+                    break;
+            }
+        }, BABYLON.PointerEventTypes.POINTERDOWN | BABYLON.PointerEventTypes.POINTERUP | BABYLON.PointerEventTypes.POINTERMOVE);
 
         return scene;
     };
